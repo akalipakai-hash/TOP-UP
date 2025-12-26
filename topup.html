@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Diamond Generator - Prank Mode</title>
+    <style>
+        :root {
+            --primary: #00ffcc;
+            --dark: #121212;
+            --card: #1e1e1e;
+        }
+
+        body {
+            background-color: var(--dark);
+            color: white;
+            font-family: 'Segoe UI', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background: var(--card);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 0 30px rgba(0, 255, 204, 0.2);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            border: 1px solid #333;
+        }
+
+        h1 { color: var(--primary); font-size: 24px; margin-bottom: 20px; }
+
+        .input-group { margin-bottom: 15px; text-align: left; }
+
+        label { display: block; margin-bottom: 5px; font-size: 14px; color: #aaa; }
+
+        input, select {
+            width: 100%;
+            padding: 12px;
+            background: #252525;
+            border: 1px solid #444;
+            color: white;
+            border-radius: 8px;
+            box-sizing: border-box;
+        }
+
+        .diamond-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .option {
+            background: #252525;
+            padding: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            border: 1px solid #444;
+            transition: 0.3s;
+        }
+
+        .option:hover { border-color: var(--primary); background: #2a2a2a; }
+
+        .btn-topup {
+            background: var(--primary);
+            color: black;
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+
+        #loading { display: none; margin-top: 20px; }
+        .spinner {
+            border: 4px solid #333;
+            border-top: 4px solid var(--primary);
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 10px auto;
+        }
+
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>❄🎄HADIAH NATAL DIAMOND GRATIS 🎄❄</h1>
+    <p style="font-size: 12px; color: #888;">Masukkan User ID dan pilih jumlah item.</p>
+
+    <div id="main-form">
+        <div class="input-group">
+            <label>User ID Game</label>
+            <input type="text" id="userid" placeholder="Contoh: 12345678(1234)">
+        </div>
+
+        <div class="input-group">
+            <label>Pilih Game</label>
+            <select>
+                <option>Mobile Legends</option>
+                <option>Free Fire</option>
+                <option>PUBG Mobile</option>
+                <option>Genshin Impact</option>
+            </select>
+        </div>
+
+        <div class="diamond-grid">
+            <div class="option">💎 1,000</div>
+            <div class="option">💎 5,000</div>
+            <div class="option">💎 10,000</div>
+            <div class="option">💎 50,000</div>
+        </div>
+
+        <button class="btn-topup" onclick="startProcess()">Klaim Sekarang</button>
+    </div>
+
+    <div id="loading">
+        <div class="spinner"></div>
+        <p id="status">Menghubungkan ke Server...</p>
+    </div>
+</div>
+
+<script>
+    function startProcess() {
+        const id = document.getElementById('userid').value;
+        if(id === "") return alert("Isi ID dulu!");
+
+        document.getElementById('main-form').style.display = 'none';
+        document.getElementById('loading').style.display = 'block';
+
+        const stages = [
+            "Mencari User ID " + id + "...",
+            "Menginjeksi Database...",
+            "Melewati Verifikasi Keamanan...",
+            "Hampir Selesai...",
+            "GAGAL! Anda Terkena Prank! 😂"
+        ];
+
+        let i = 0;
+        const interval = setInterval(() => {
+            document.getElementById('status').innerText = stages[i];
+            i++;
+            if(i === stages.length) {
+                clearInterval(interval);
+                setTimeout(() => {
+                    alert("Waduh! Mau Diamond gratis ya? Belajar coding saja yuk biar bisa beli Diamond sendiri! 🎮");
+                    location.reload();
+                }, 1500);
+            }
+        }, 2000);
+    }
+</script>
+
+</body>
+</html>
